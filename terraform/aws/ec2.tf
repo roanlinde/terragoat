@@ -75,6 +75,7 @@ resource "aws_volume_attachment" "ebs_att" {
 }
 
 resource "aws_security_group" "web-node" {
+  # oak9: Explicitly define source IP addresses for ingress rules
   # security group is open to the world in SSH port
   name        = "${local.resource_prefix.value}-sg"
   description = "${local.resource_prefix.value} Security Group"
@@ -269,6 +270,7 @@ resource "aws_flow_log" "vpcflowlogs" {
 }
 
 resource "aws_s3_bucket" "flowbucket" {
+  # oak9: Configure ACL to restrict public access
   bucket        = "${local.resource_prefix.value}-flowlogs"
   force_destroy = true
 
